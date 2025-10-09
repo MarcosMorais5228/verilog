@@ -1,19 +1,19 @@
 `include "NOT.v"
 
 module NOT_tb;
-    reg fio1, fio2;
+    reg fio1;
     wire fio3;
 
-    NOT_tb NOT(A.(fio1), .A(fio2), .F(fio3));
+    NOT NOT_gate(.A(fio1), .F(fio3));
 
     initial begin
         $dumpfile("NOT.vcd");
         $dumpvars (0,NOT_tb);
         
-        A = 1; 
+        fio1 = 1; 
         #5;
 
-        A = 0;
+        fio1 = 0;
         #5;
     end
 endmodule
