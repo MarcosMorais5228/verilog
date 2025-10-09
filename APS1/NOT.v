@@ -1,4 +1,4 @@
 module NOT (input A, output F);
-    nand(F,A,A)
+    nand(F,A,A);
     
 endmodule
