@@ -12,16 +12,16 @@ module AND_tb();
         $dumpvars (0,AND_tb);
 
         fio1 = 0; fio2 = 0;
-        #5
+        #5;
 
         fio1 = 0; fio2 = 1;
-        #5
+        #5;
         
         fio1 = 1; fio2 = 0;
-        #5
+        #5;
 
         fio1 = 1; fio2 = 1;
-        #5
+        #5;
 
     end
 
