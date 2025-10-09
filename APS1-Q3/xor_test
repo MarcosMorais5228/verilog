@@ -1,0 +1,114 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "E:\Marcos01\iverilog\lib\ivl\system.vpi";
+:vpi_module "E:\Marcos01\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "E:\Marcos01\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "E:\Marcos01\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "E:\Marcos01\iverilog\lib\ivl\va_math.vpi";
+S_00000281e8aa6600 .scope module, "comp_tb" "comp_tb" 2 4;
+ .timescale -9 -12;
+v00000281e8aee250_0 .var "A", 0 0;
+v00000281e8aee9d0_0 .var "B", 0 0;
+v00000281e8aeee30_0 .net "F_sys1", 0 0, L_00000281e8aa3cc0;  1 drivers
+v00000281e8aeeed0_0 .net "F_sys2", 0 0, L_00000281e8aa3e80;  1 drivers
+S_00000281e8aa6790 .scope module, "DUT" "XOR" 2 13, 3 1 0, S_00000281e8aa6600;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "A";
+    .port_info 1 /INPUT 1 "B";
+    .port_info 2 /OUTPUT 1 "F";
+L_00000281e8aa3fd0 .functor NAND 1, v00000281e8aee250_0, v00000281e8aee250_0, C4<1>, C4<1>;
+L_00000281e8aa3f60 .functor NAND 1, v00000281e8aee9d0_0, v00000281e8aee9d0_0, C4<1>, C4<1>;
+L_00000281e8aa3be0 .functor NAND 1, L_00000281e8aa3fd0, v00000281e8aee9d0_0, C4<1>, C4<1>;
+L_00000281e8aa3940 .functor NAND 1, v00000281e8aee250_0, L_00000281e8aa3f60, C4<1>, C4<1>;
+L_00000281e8aa3cc0 .functor NAND 1, L_00000281e8aa3be0, L_00000281e8aa3940, C4<1>, C4<1>;
+v00000281e89e6f90_0 .net "A", 0 0, v00000281e8aee250_0;  1 drivers
+v00000281e8a95d90_0 .net "An", 0 0, L_00000281e8aa3fd0;  1 drivers
+v00000281e8a95a00_0 .net "B", 0 0, v00000281e8aee9d0_0;  1 drivers
+v00000281e89ebf40_0 .net "Bn", 0 0, L_00000281e8aa3f60;  1 drivers
+v00000281e89ea8a0_0 .net "F", 0 0, L_00000281e8aa3cc0;  alias, 1 drivers
+v00000281e8aa6920_0 .net "f1", 0 0, L_00000281e8aa3be0;  1 drivers
+v00000281e8aa69c0_0 .net "f2", 0 0, L_00000281e8aa3940;  1 drivers
+S_00000281e89e6930 .scope module, "REF" "xorb" 2 14, 4 3 0, S_00000281e8aa6600;
+ .timescale -9 -12;
+    .port_info 0 /OUTPUT 1 "F";
+    .port_info 1 /INPUT 1 "A";
+    .port_info 2 /INPUT 1 "B";
+L_00000281e8aa3e80 .functor XOR 1, v00000281e8aee250_0, v00000281e8aee9d0_0, C4<0>, C4<0>;
+v00000281e89e6ac0_0 .net "A", 0 0, v00000281e8aee250_0;  alias, 1 drivers
+v00000281e89e6b60_0 .net "B", 0 0, v00000281e8aee9d0_0;  alias, 1 drivers
+v00000281e89e6c00_0 .net "F", 0 0, L_00000281e8aa3e80;  alias, 1 drivers
+    .scope S_00000281e8aa6600;
+T_0 ;
+    %vpi_call 2 18 "$display", "A B | F - Test" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000281e8aee250_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000281e8aee9d0_0, 0, 1;
+    %delay 10000, 0;
+    %vpi_call 2 22 "$write", "%b %b | %b", v00000281e8aee250_0, v00000281e8aee9d0_0, v00000281e8aeee30_0 {0 0 0};
+    %load/vec4 v00000281e8aeee30_0;
+    %load/vec4 v00000281e8aeeed0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.0, 4;
+    %vpi_call 2 23 "$display", " - PASS" {0 0 0};
+    %jmp T_0.1;
+T_0.0 ;
+    %vpi_call 2 23 "$display", " FAIL" {0 0 0};
+T_0.1 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000281e8aee250_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000281e8aee9d0_0, 0, 1;
+    %delay 10000, 0;
+    %vpi_call 2 28 "$write", "%b %b | %b", v00000281e8aee250_0, v00000281e8aee9d0_0, v00000281e8aeee30_0 {0 0 0};
+    %load/vec4 v00000281e8aeee30_0;
+    %load/vec4 v00000281e8aeeed0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.2, 4;
+    %vpi_call 2 29 "$display", " - PASS" {0 0 0};
+    %jmp T_0.3;
+T_0.2 ;
+    %vpi_call 2 29 "$display", " FAIL" {0 0 0};
+T_0.3 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000281e8aee250_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000281e8aee9d0_0, 0, 1;
+    %delay 10000, 0;
+    %vpi_call 2 34 "$write", "%b %b | %b", v00000281e8aee250_0, v00000281e8aee9d0_0, v00000281e8aeee30_0 {0 0 0};
+    %load/vec4 v00000281e8aeee30_0;
+    %load/vec4 v00000281e8aeeed0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.4, 4;
+    %vpi_call 2 35 "$display", " - PASS" {0 0 0};
+    %jmp T_0.5;
+T_0.4 ;
+    %vpi_call 2 35 "$display", " FAIL" {0 0 0};
+T_0.5 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000281e8aee250_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000281e8aee9d0_0, 0, 1;
+    %delay 10000, 0;
+    %vpi_call 2 41 "$write", "%b %b | %b", v00000281e8aee250_0, v00000281e8aee9d0_0, v00000281e8aeee30_0 {0 0 0};
+    %load/vec4 v00000281e8aeee30_0;
+    %load/vec4 v00000281e8aeeed0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.6, 4;
+    %vpi_call 2 42 "$display", " - PASS" {0 0 0};
+    %jmp T_0.7;
+T_0.6 ;
+    %vpi_call 2 42 "$display", " FAIL" {0 0 0};
+T_0.7 ;
+    %vpi_call 2 45 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "testbench_xor.v";
+    "./XOR.v";
+    "./xorb.v";

@@ -10,7 +10,7 @@ module comp_tb;
   wire F_sys1, F_sys2;
 
   // Instantiate the two implementations
-  xora DUT(.A(A), .B(B), .F(F_sys1));  // Structural Model = Developer's File
+  XOR DUT(.A(A), .B(B), .F(F_sys1));  // Structural Model = Developer's File
   xorb REF(.A(A), .B(B), .F(F_sys2));  // Behavioral Model = Architect's File
   
   // Stimulus generation
