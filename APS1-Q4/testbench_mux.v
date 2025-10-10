@@ -1,4 +1,6 @@
 `timescale 1ns/1ps
+`include "mux_4t1a.v"
+`include "mux_4t1b.v"
 
 module comp_tb;
 
