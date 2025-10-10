@@ -1,6 +1,9 @@
 `timescale 1ns/1ps
 `include "mux_4t1a.v"
 `include "mux_4t1b.v"
+`include "portas/NOT.v"
+`include "portas/AND3.v"
+`include "portas/OR4.v"
 
 module comp_tb;
 

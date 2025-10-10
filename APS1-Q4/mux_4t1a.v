@@ -8,22 +8,18 @@ module mux_4t1a(
     assign s1 = Sel[1];
     assign s0 = Sel[0];
 
-    wire f1, f2, f3, f4, f5, An, Cn, s1n, s0n;
+    wire f1, f2, f3, f4, s1n, s0n;
 
-    nand(An, A, A);
-    nand(Cn, C, C);
+    NOT inv3(s1, s1n);
+    NOT inv4(s0, s0n);
 
-    nand(s1n, s1, s1);
-    nand(s0n, s0, s0);
+    AND3 and1(A, s1n, s0n, f1);
+    AND3 and2(B, s1n, s0, f2);
+    AND3 and3(C, s1, s0n, f3);
+    AND3 and4(D, s1, s0, f4);
 
-    nand(f1, An, s1n, s0n);
-    nand(f2, B, s1n, s0);
-    nand(f3, Cn, s1, s0n);
-    nand(f4, D, s1, s0);
 
-    nand(f5, f1, f3);
-
-    nand(F, f2, f4, f5);
+    OR4 or1(f1, f2, f3, f4, F);
 
 
 endmodule
