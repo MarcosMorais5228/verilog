@@ -12,10 +12,10 @@ module mux8b_tb;
         $dumpfile("mux8b_tb.vcd");
         $dumpvars(0, mux8b_tb);
 
-        A = 8'hAA; B = 8'h55;
+        A = 8'b10101010; B = 8'b01010101;
         Sel = 0; #10;
         Sel = 1; #10;
-        A = 8'hF0; B = 8'h0F;
+        A = 8'b11110000; B = 8'b00001111;
         Sel = 0; #10;
         Sel = 1; #10;
 

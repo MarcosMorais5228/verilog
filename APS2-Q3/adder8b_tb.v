@@ -13,10 +13,10 @@ module adder8b_tb;
         $dumpfile("adder8b_tb.vcd");
         $dumpvars(0, adder8b_tb);
 
-        A=8'd10; B=8'd5; Cin=0; #10;
-        A=8'd127; B=8'd1; Cin=0; #10;
-        A=8'd200; B=8'd100; Cin=1; #10;
-        A=8'hFF; B=8'h01; Cin=0; #10;
+        A=8'b00001010; B=8'b00000101; Cin=0; #10;
+        A=8'b01111111; B=8'b00000001; Cin=0; #10;
+        A=8'b11001000; B=8'b01100100; Cin=1; #10;
+        A=8'b11111111; B=8'b00000001; Cin=0; #10;
 
     end
 endmodule

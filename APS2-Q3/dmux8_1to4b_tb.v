@@ -12,7 +12,7 @@ module dmux8_1to4b_tb;
         $dumpfile("dmux8_1to4b_tb.vcd");
         $dumpvars(0, dmux8_1to4b_tb);
 
-        A = 8'hFF;
+        A = 8'b11111111;
         Sel = 2'b00; #10;
         Sel = 2'b01; #10;
         Sel = 2'b10; #10;

@@ -12,9 +12,9 @@ module dmux8b_tb;
         $dumpfile("dmux8b_tb.vcd");
         $dumpvars(0, dmux8b_tb);
 
-        A = 8'hFF; Sel = 0; #10;
-        A = 8'hFF; Sel = 1; #10;
-        A = 8'hAA; Sel = 0; #10;
+        A = 8'b11111111; Sel = 0; #10;
+        A = 8'b11111111; Sel = 1; #10;
+        A = 8'b10101010; Sel = 0; #10;
 
     end
 endmodule
