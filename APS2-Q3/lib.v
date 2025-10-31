@@ -114,6 +114,35 @@ module xor8b (
 
 endmodule
 
+module mux_4t1a 
+        (output wire F, 
+        input wire A, B, C, D, 
+        input wire [1:0] Sel);
+
+    wire I0i, I1i, I2i, I3i, I0, I1, I2, I3, F1, F2;
+    wire Sel0n, Sel1n;
+
+    NOT inv1 (Sel0n, Sel[0]);
+    NOT inv2 (Sel1n, Sel[1]);
+
+    AND and1 (I0i, A, Sel0n);
+    AND and2 (I0, I0i, Sel1n);
+
+    AND and3 (I1i, B, Sel[0]);
+    AND and4 (I1, I1i, Sel1n);
+
+    AND and5 (I2i, C, Sel0n);
+    AND and6 (I2, I2i, Sel[1]);
+
+    AND and7 (I3i, D, Sel[0]);
+    AND and8 (I3, I3i, Sel[1]);
+
+    OR or1 (F1, I0, I1);
+    OR or2 (F2, F1, I2);
+    OR or3 (F, F2, I3);
+
+endmodule
+
 module mux8b(
     output wire [7:0] F,
     input wire [7:0] A, B,
@@ -217,31 +246,4 @@ module adder8b
 	
 endmodule
 
-module mux_4t1a 
-        (output wire F, 
-        input wire A, B, C, D, 
-        input wire [1:0] Sel);
 
-    wire I0i, I1i, I2i, I3i, I0, I1, I2, I3, F1, F2;
-    wire Sel0n, Sel1n;
-
-    NOT inv1 (Sel0n, Sel[0]);
-    NOT inv2 (Sel1n, Sel[1]);
-
-    AND and1 (I0i, A, Sel0n);
-    AND and2 (I0, I0i, Sel1n);
-
-    AND and3 (I1i, B, Sel[0]);
-    AND and4 (I1, I1i, Sel1n);
-
-    AND and5 (I2i, C, Sel0n);
-    AND and6 (I2, I2i, Sel[1]);
-
-    AND and7 (I3i, D, Sel[0]);
-    AND and8 (I3, I3i, Sel[1]);
-
-    OR or1 (F1, I0, I1);
-    OR or2 (F2, F1, I2);
-    OR or3 (F, F2, I3);
-
-endmodule
