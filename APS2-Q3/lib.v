@@ -1,5 +1,40 @@
 `timescale 1ps/1ps
 
+module NOT (output wire F, input wire A);
+    nand(F,A,A);
+    
+endmodule
+
+module AND (output wire F, input wire A, B);
+    wire Fn;
+
+    nand(Fn, A, B);
+    nand(F, Fn, Fn);
+
+endmodule
+
+module OR (output wire F, input wire A, B);
+    wire f1, f2;
+
+    nand(f1, A, A);
+    nand(f2, B, B);
+    nand(F, f1, f2);
+
+endmodule
+
+module XOR (output wire F, input wire A, B);
+    wire An, Bn, f1, f2;
+
+    nand(An, A, A);
+    nand(Bn, B, B);
+
+    nand(f1, An, B);
+    nand(f2, A, Bn);
+
+    nand(F, f1, f2);
+
+endmodule
+
 module not8b
 	(output wire [7:0] F,
 	input wire [7:0] A);
@@ -208,40 +243,5 @@ module mux_4t1a
     OR or1 (F1, I0, I1);
     OR or2 (F2, F1, I2);
     OR or3 (F, F2, I3);
-
-endmodule
-
-module NOT (output wire F, input wire A);
-    nand(F,A,A);
-    
-endmodule
-
-module AND (output wire F, input wire A, B);
-    wire Fn;
-
-    nand(Fn, A, B);
-    nand(F, Fn, Fn);
-
-endmodule
-
-module OR (output wire F, input wire A, B);
-    wire f1, f2;
-
-    nand(f1, A, A);
-    nand(f2, B, B);
-    nand(F, f1, f2);
-
-endmodule
-
-module XOR (output wire F, input wire A, B);
-    wire An, Bn, f1, f2;
-
-    nand(An, A, A);
-    nand(Bn, B, B);
-
-    nand(f1, An, B);
-    nand(f2, A, Bn);
-
-    nand(F, f1, f2);
 
 endmodule
