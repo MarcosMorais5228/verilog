@@ -1,0 +1,431 @@
+$date
+	Mon Nov 24 11:26:27 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_semaforo $end
+$var wire 1 ! VERMELHO_s $end
+$var wire 1 " VERMELHO_c $end
+$var wire 1 # VERDE_s $end
+$var wire 1 $ VERDE_c $end
+$var wire 1 % AMARELO_s $end
+$var wire 1 & AMARELO_c $end
+$var reg 1 ' CAR $end
+$var reg 1 ( TIMEOUT $end
+$var reg 1 ) clk $end
+$var reg 1 * res $end
+$scope module modelo_comportamental $end
+$var wire 1 ' CAR $end
+$var wire 1 ( TIMEOUT $end
+$var wire 1 ) clk $end
+$var wire 1 * res $end
+$var parameter 2 + S_AMARELO $end
+$var parameter 2 , S_VERDE $end
+$var parameter 2 - S_VERMELHO $end
+$var reg 1 & AMARELO $end
+$var reg 1 $ VERDE $end
+$var reg 1 " VERMELHO $end
+$var reg 2 . next_state [1:0] $end
+$var reg 2 / state [1:0] $end
+$upscope $end
+$scope module semaforo $end
+$var wire 1 % AMARELO $end
+$var wire 1 ' CAR $end
+$var wire 1 0 D0 $end
+$var wire 1 1 D1 $end
+$var wire 1 2 D1_term1 $end
+$var wire 1 ( TIMEOUT $end
+$var wire 1 # VERDE $end
+$var wire 1 ! VERMELHO $end
+$var wire 1 ) clk $end
+$var wire 1 * res $end
+$var wire 1 3 notTIMEOUT $end
+$var wire 1 4 notQ1 $end
+$var wire 1 5 notQ0 $end
+$var wire 1 6 is_vermelho $end
+$var wire 1 7 is_verde $end
+$var wire 1 8 is_amarelo $end
+$var wire 1 9 Q1n $end
+$var wire 1 : Q1 $end
+$var wire 1 ; Q0n $end
+$var wire 1 < Q0 $end
+$var wire 1 = D1_term2 $end
+$var wire 1 > D1_expr $end
+$var wire 1 ? D0_expr $end
+$scope module and_D0 $end
+$var wire 1 ' B $end
+$var wire 1 ? F $end
+$var wire 1 @ Fn $end
+$var wire 1 7 A $end
+$upscope $end
+$scope module and_D1_term2 $end
+$var wire 1 = F $end
+$var wire 1 A Fn $end
+$var wire 1 3 B $end
+$var wire 1 6 A $end
+$upscope $end
+$scope module and_amarelo_state $end
+$var wire 1 8 F $end
+$var wire 1 B Fn $end
+$var wire 1 < B $end
+$var wire 1 4 A $end
+$upscope $end
+$scope module and_verde_state $end
+$var wire 1 7 F $end
+$var wire 1 C Fn $end
+$var wire 1 5 B $end
+$var wire 1 4 A $end
+$upscope $end
+$scope module and_vermelho_state $end
+$var wire 1 6 F $end
+$var wire 1 D Fn $end
+$var wire 1 5 B $end
+$var wire 1 : A $end
+$upscope $end
+$scope module ff0 $end
+$var wire 1 ) Clock $end
+$var wire 1 0 D $end
+$var wire 1 E Preset $end
+$var wire 1 * Reset $end
+$var reg 1 < Q $end
+$var reg 1 ; Qn $end
+$upscope $end
+$scope module ff1 $end
+$var wire 1 ) Clock $end
+$var wire 1 1 D $end
+$var wire 1 F Preset $end
+$var wire 1 * Reset $end
+$var reg 1 : Q $end
+$var reg 1 9 Qn $end
+$upscope $end
+$scope module inv0 $end
+$var wire 1 < A $end
+$var wire 1 5 F $end
+$upscope $end
+$scope module inv1 $end
+$var wire 1 : A $end
+$var wire 1 4 F $end
+$upscope $end
+$scope module invTIMEOUT $end
+$var wire 1 ( A $end
+$var wire 1 3 F $end
+$upscope $end
+$scope module or_D1 $end
+$var wire 1 2 A $end
+$var wire 1 = B $end
+$var wire 1 > F $end
+$var wire 1 G f1 $end
+$var wire 1 H f2 $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10 -
+b0 ,
+b1 +
+$end
+#0
+$dumpvars
+1H
+1G
+1F
+1E
+1D
+0C
+1B
+1A
+1@
+0?
+0>
+0=
+0<
+1;
+0:
+19
+08
+17
+06
+15
+14
+13
+02
+01
+00
+b0 /
+b0 .
+0*
+0)
+0(
+0'
+0&
+0%
+1$
+1#
+0"
+0!
+$end
+#5
+1)
+#10
+0)
+#12
+1*
+#15
+1)
+#20
+0)
+#25
+1)
+#30
+0)
+#32
+10
+1?
+b1 .
+0@
+1'
+#35
+00
+0?
+1@
+11
+1>
+0#
+07
+0G
+1C
+1%
+12
+18
+b10 .
+05
+0B
+b1 /
+1&
+0$
+0;
+1<
+1)
+#40
+0)
+#42
+0'
+#45
+0H
+1=
+0A
+11
+1>
+1!
+16
+1G
+0D
+0%
+02
+08
+15
+1B
+04
+1"
+0&
+b10 /
+1;
+0<
+09
+1:
+1)
+#50
+0)
+#55
+1)
+#60
+0)
+#65
+1)
+#70
+0)
+#75
+1)
+#80
+0)
+#85
+1)
+#90
+0)
+#95
+1)
+#100
+0)
+#102
+01
+0>
+1H
+0=
+1A
+b0 .
+03
+1(
+#105
+1#
+17
+0C
+0!
+06
+14
+1D
+0"
+1$
+b0 /
+19
+0:
+1)
+#110
+0)
+#115
+1)
+#120
+0)
+#122
+13
+0(
+#125
+1)
+#130
+0)
+#135
+1)
+#140
+0)
+#145
+1)
+#150
+0)
+#155
+1)
+#160
+0)
+#162
+10
+1?
+b1 .
+0@
+1'
+#165
+00
+0?
+1@
+11
+1>
+0#
+07
+0G
+1C
+1%
+12
+18
+b10 .
+05
+0B
+1&
+0$
+b1 /
+0;
+1<
+1)
+#170
+0)
+#175
+0H
+1=
+0A
+11
+1>
+1!
+16
+1G
+0D
+0%
+02
+08
+15
+1B
+04
+b10 /
+1"
+0&
+1;
+0<
+09
+1:
+1)
+#180
+0)
+#182
+0'
+#185
+1)
+#190
+0)
+#195
+1)
+#200
+0)
+#202
+01
+0>
+1H
+0=
+1A
+b0 .
+03
+1(
+#205
+1#
+17
+0C
+0!
+06
+14
+1D
+0"
+1$
+b0 /
+19
+0:
+1)
+#210
+0)
+#215
+1)
+#220
+0)
+#222
+13
+0(
+#225
+1)
+#230
+0)
+#235
+1)
+#240
+0)
+#245
+1)
+#250
+0)
+#255
+1)
+#260
+0)
+#265
+1)
+#270
+0)
+#272
