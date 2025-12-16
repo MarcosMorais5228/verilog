@@ -6,119 +6,162 @@
 
 module control_unit_tb;
 
-    // --- Sinais internos para o Testbench ---
-    reg Clk;
-    reg Reset;
-    // IR_tb será usado para simular tanto o Opcode quanto o Dado/Endereço
-    reg [7:0] IR_tb;         
-    reg [3:0] CCR_Result_tb; 
-
-    // --- Sinais de Saída da Unidade de Controle (DUT) ---
-    wire IR_Load, MAR_Load;
-    wire PC_Load, PC_Inc;
-    wire A_Load, B_Load;
-    wire CCR_Load;
+    // --- SINAIS DE CONTROLE (OUTPUTS do UDC, DECLARADOS COMO WIRE AQUI) ---
+    // O módulo 'control_unit' dirige esses sinais (driver).
+    wire IR_Load, MAR_Load, PC_Load, PC_Inc, A_Load, B_Load, CCR_Load, write;
     wire [2:0] ALU_Sel;
     wire [1:0] Bus1_Sel, Bus2_Sel;
-    wire write;
 
-    // --- Parâmetros de Opcodes ---
-    parameter [7:0] BRZ_DIR = 8'h30; 
-    
-    // --- Instanciação da Unidade de Controle (DUT) ---
-    control_unit DUT (
-        .IR_Load(IR_Load),
-        .MAR_Load(MAR_Load),
-        .PC_Load(PC_Load),
-        .PC_Inc(PC_Inc),
-        .A_Load(A_Load),
+    // --- SINAIS DE ENTRADA do UDC (DECLARADOS COMO REG AQUI) ---
+    // O Testbench dirige esses sinais.
+    reg  [7:0] IR;
+    reg  [3:0] CCR_Result; // Flags: [3]=N, [2]=Z, [1]=V, [0]=C
+    reg  Clk, Reset;
+
+    // --- Instanciação do Módulo de Controle (UDC) ---
+    control_unit UDC_Inst (
+        .IR_Load(IR_Load), 
+        .MAR_Load(MAR_Load), 
+        .PC_Load(PC_Load), 
+        .PC_Inc(PC_Inc), 
+        .A_Load(A_Load), 
         .B_Load(B_Load),
         .CCR_Load(CCR_Load),
         .ALU_Sel(ALU_Sel),
-        .Bus1_Sel(Bus1_Sel),
+        .Bus1_Sel(Bus1_Sel), 
         .Bus2_Sel(Bus2_Sel),
-        .write(write),
-        .IR(IR_tb),
-        .CCR_Result(CCR_Result_tb),
-        .Clk(Clk),
+        .write(write), 
+        .IR(IR), 
+        .CCR_Result(CCR_Result), 
+        .Clk(Clk), 
         .Reset(Reset)
     );
 
-    // --- Memória Simulada ---
-    reg [7:0] instruction_stream [0:255]; 
-    reg [7:0] PC_sim;
-    
-    // --- Gerador de Clock ---
+    // --- Clock Generator ---
     parameter CLK_PERIOD = 10;
     initial begin
         Clk = 0;
         forever #(CLK_PERIOD / 2) Clk = ~Clk;
     end
 
-    // --- Lógica de Simulação Principal (Setup) ---
+    // --- Main Test Sequence ---
     initial begin
-        // --- Programa de Teste na Memória Simulada ---
-        instruction_stream[8'h00] = 8'h01; // LDA_IMM
-        instruction_stream[8'h01] = 8'hAA; 
-        instruction_stream[8'h02] = 8'h11; // ADD_IMM
-        instruction_stream[8'h03] = 8'h05;
-        instruction_stream[8'h04] = 8'h03; // STA_DIR
-        instruction_stream[8'h05] = 8'h01; 
-        instruction_stream[8'h06] = 8'h50; 
-        instruction_stream[8'h07] = 8'h30; // BRZ_DIR
-        instruction_stream[8'h08] = 8'h00; // Endereço Alto (ignoramos)
-        instruction_stream[8'h09] = 8'h80; // Endereço Baixo/Destino do Salto
-        instruction_stream[8'h80] = 8'hFF; // END (Novo Destino)
+        // Valores iniciais
+        Reset = 1;
+        IR = 8'h00;
+        CCR_Result = 4'b0000; // N, Z, V, C = 0
 
-        $dumpfile("control_unit_tb.vcd");
-        $dumpvars(0, control_unit_tb);
-        
-        // Reset
+        // 1. Reset (Ciclo 0)
+        $display("-----------------------------------------");
+        $display("START TESTBENCH: INITIAL RESET");
         Reset = 0;
-        IR_tb = 8'hFF;
-        CCR_Result_tb = 4'b0000;
-        PC_sim = 8'h00; 
+        @(posedge Clk);
+        Reset = 1;
+        $display("RESET CONCLUIDO. Estado atual: S0_FETCH");
+        $display("-----------------------------------------");
 
-        #10 Reset = 1; 
-        #20; 
+        // --- TESTE 1: INSTRUÇÃO LDA_IMM (Immediate Load) ---
+        // Sequência: S0 -> S1 -> S2 -> S3 (LDA_IMM) -> S4_LDR_IMM -> S5_LDR_IMM -> S6_LDR_IMM -> S0
+        $display("--- TESTE 1: LDA_IMM (8'h86) ---");
         
-        $display("--- Start Simulation ---");
-        
-        repeat (50) @(posedge Clk);
-        
-        $display("--- End Simulation ---");
-        $finish;
-    end
-    
-    // --- Lógica Corrigida para simular a busca de instrução/operando ---
-    always @(posedge Clk) begin
-        
-        // --- Leitura do Dado/Instrução da Memória para o Barramento/IR_tb ---
-        // Bus2_Sel == 2'b10 (0x2) significa que a memória está colocando um dado no barramento
-        // (Este dado precisa ser capturado pelo IR_tb para ser usado pelo PC_Load ou B_Load)
-        if (Bus2_Sel == 2'b10) begin
-             // Se a memória está lendo, o IR_tb recebe o dado no PC atual.
-             IR_tb <= instruction_stream[PC_sim];
-        end
+        // S0_FETCH: MAR <- PC 
+        @(posedge Clk);
 
-        // 1. Carga e Incremento do PC (Prioridade PC_Load > PC_Inc)
-        if (PC_Load) begin
-            // PC_Load ativo (S6_BRZ_DIR): PC carrega o valor lido da memória (que está no IR_tb)
-            PC_sim <= IR_tb; 
-        end else if (PC_Inc) begin
-            PC_sim <= PC_sim + 1;
-        end
+        // S1_FETCH: IR <- Mem, PC++
+        IR = 8'h86; // LDA_IMM
+        @(posedge Clk);
+        $display("IR carregado: %h. Estado: S2_FETCH", IR);
+
+        // S2_FETCH: MAR <- PC (PC incrementado para o endereço do operando)
+        @(posedge Clk);
         
-        // 2. Configurar CCR para teste de BRZ (PC=08, IR=30)
-        // Forçamos Z=1 no momento em que o opcode BRZ (30) está no IR_tb e PC=08
-        if (PC_sim == 8'h08 && IR_tb == BRZ_DIR) begin
-             CCR_Result_tb <= 4'b0100; // Z=1 (Desvio Tomado)
-        end else begin
-             CCR_Result_tb <= 4'b0000;
-        end
+        // S3_DECODE: (Decodifica para S4_LDR_IMM)
+        @(posedge Clk);
+        $display("Estado: S4_LDR_IMM (Leitura do Operando)");
+
+        // S4_LDR_IMM: B <- Mem[PC], PC++
+        // Simula a leitura do dado (Operando = 0xFF). (O IR é reutilizado para simular o dado lido)
+        IR = 8'hFF; 
+        @(posedge Clk);
+        $display("Dado (0xFF) lido. Estado: S5_LDR_IMM");
+
+        // S5_LDR_IMM: A <- B, CCR_Load (LDA_IMM)
+        @(posedge Clk);
+        $display("Registrador A e CCR carregados. Estado: S6_LDR_IMM");
+
+        // S6_LDR_IMM: NOP (Volta para S0)
+        @(posedge Clk);
+        $display("Fim da instrução. Próximo estado: S0_FETCH");
+        $display("-----------------------------------------");
+
+
+        // --- TESTE 2: INSTRUÇÃO ADD_AB (ALU Operation) ---
+        // Sequência: S0 -> S1 -> S2 -> S3 (ADD_AB) -> S4_ALU_OP -> S5_ALU_OP -> S0
+        $display("--- TESTE 2: ADD_AB (8'h42) ---");
+
+        // S0_FETCH: MAR <- PC
+        @(posedge Clk);
+
+        // S1_FETCH: IR <- Mem, PC++
+        IR = 8'h42; // ADD_AB
+        @(posedge Clk);
+        $display("IR carregado: %h. Estado: S2_FETCH", IR);
+
+        // S2_FETCH: MAR <- PC (Endereço do próximo operando, mas desnecessário para ADD_AB)
+        @(posedge Clk);
+
+        // S3_DECODE: (Decodifica para S4_ALU_OP)
+        @(posedge Clk);
+        $display("Estado: S4_ALU_OP (Execução da ALU)");
+
+        // S4_ALU_OP: A <- A+B, CCR_Load
+        @(posedge Clk);
+        $display("ALU executada. Registrador A e CCR carregados. Estado: S5_ALU_OP");
+
+        // S5_ALU_OP: NOP (Volta para S0)
+        @(posedge Clk);
+        $display("Fim da instrução. Próximo estado: S0_FETCH");
+        $display("-----------------------------------------");
+
         
-        $display("Time: %0d | PC: %h | IR: %h | IR_Load: %b | B_Load: %b | PC_Load: %b | PC_Inc: %b | write: %b | CCR_Z: %b",
-            $time, PC_sim, IR_tb, IR_Load, B_Load, PC_Load, PC_Inc, write, CCR_Result_tb[2]);
+        // --- TESTE 3: INSTRUÇÃO BEQ (Branch Condicional) - Tomado (Z=1) ---
+        // Sequência: S0 -> S1 -> S2 -> S3 (BEQ) -> S4_BR -> S5_BR -> S6_BR -> S0
+        $display("--- TESTE 3: BEQ (8'h23) - TOMADO (Z=1) ---");
+        
+        // Simula Z=1 para que o branch seja tomado
+        CCR_Result = 4'b0100; // Z=1
+
+        // S0_FETCH: MAR <- PC
+        @(posedge Clk);
+
+        // S1_FETCH: IR <- Mem, PC++
+        IR = 8'h23; // BEQ
+        @(posedge Clk);
+        $display("IR carregado: %h. Estado: S2_FETCH", IR);
+
+        // S2_FETCH: MAR <- PC (Endereço do operando alto do branch)
+        @(posedge Clk);
+
+        // S3_DECODE: (Decodifica para S4_BR)
+        @(posedge Clk);
+        $display("Estado: S4_BR (Leitura do endereço alto)");
+
+        // S4_BR: MAR_H <- Mem[PC], PC++
+        @(posedge Clk);
+
+        // S5_BR: MAR_L <- Mem[PC], PC++. Condicional (Z=1) -> S6_BR
+        @(posedge Clk);
+        $display("Condição (Z=1) satisfeita. Próximo estado: S6_BR");
+
+        // S6_BR: PC <- Endereço do Branch (Simula PC_Load=1)
+        @(posedge Clk);
+        $display("PC carregado com endereço de branch. Próximo estado: S0_FETCH");
+
+        // Fim da simulação
+        @(posedge Clk);
+        $display("-----------------------------------------");
+        $display("FIM DA SIMULAÇÃO.");
+        $stop;
     end
 
 endmodule
