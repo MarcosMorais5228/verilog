@@ -28,9 +28,9 @@ module control_unit
     // --- Definições de Opcodes ---
     parameter [7:0] LDA_IMM = 8'h01; 
     parameter [7:0] LDA_DIR = 8'h02; 
-    parameter [7:0] ADD_IMM = 8'h11; // Adicionado
-    parameter [7:0] STA_DIR = 8'h03; // Adicionado
-    parameter [7:0] BRZ_DIR = 8'h30; // Adicionado
+    parameter [7:0] ADD_IMM = 8'h11; 
+    parameter [7:0] STA_DIR = 8'h03; 
+    parameter [7:0] BRZ_DIR = 8'h30; 
                
     // --- Inicialização ---
     initial begin
