@@ -171,16 +171,18 @@ module control_unit
             S3_DECODE : ;
 
             // --- EXECUTE: LDR_IMM (LDA_IMM, LDB_IMM) ---
+            // No bloco OUTPUT_LOGIC da control_unit.v
             S4_LDR_IMM : begin
+                PC_Inc = 1;       // Incrementa para passar pelo dado (ROM[3])
                 if (IR == LDA_IMM) A_Load = 1;
-                if (IR == LDB_IMM) B_Load = 1;
-                Bus2_Sel = 2'b10; // Memória -> B
+                if (IR == LDB_IMM) B_Load = 1; 
+                Bus2_Sel = 2'b10; // Busca dado da ROM
             end
-            S5_LDR_IMM : begin // A/B <- B, CCR_Load
+            S5_LDR_IMM : begin
+                // Mantém os sinais por mais um ciclo para garantir a escrita no registrador
                 if (IR == LDA_IMM) A_Load = 1;
                 if (IR == LDB_IMM) B_Load = 1;
                 Bus2_Sel = 2'b10;
-                
             end
             S6_LDR_IMM : ; 
 
