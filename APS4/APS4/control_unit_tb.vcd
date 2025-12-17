@@ -1,0 +1,787 @@
+$date
+	Fri Dec 12 14:02:50 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module control_unit_tb $end
+$var wire 1 ! write $end
+$var wire 1 " PC_Load $end
+$var wire 1 # PC_Inc $end
+$var wire 1 $ MAR_Load $end
+$var wire 1 % IR_Load $end
+$var wire 1 & CCR_Load $end
+$var wire 2 ' Bus2_Sel [1:0] $end
+$var wire 2 ( Bus1_Sel [1:0] $end
+$var wire 1 ) B_Load $end
+$var wire 1 * A_Load $end
+$var wire 3 + ALU_Sel [2:0] $end
+$var parameter 8 , BRZ_DIR $end
+$var parameter 32 - CLK_PERIOD $end
+$var reg 4 . CCR_Result_tb [3:0] $end
+$var reg 1 / Clk $end
+$var reg 8 0 IR_tb [7:0] $end
+$var reg 8 1 PC_sim [7:0] $end
+$var reg 1 2 Reset $end
+$scope module DUT $end
+$var wire 4 3 CCR_Result [3:0] $end
+$var wire 1 / Clk $end
+$var wire 8 4 IR [7:0] $end
+$var wire 1 2 Reset $end
+$var parameter 8 5 ADD_IMM $end
+$var parameter 8 6 BRZ_DIR $end
+$var parameter 8 7 LDA_DIR $end
+$var parameter 8 8 LDA_IMM $end
+$var parameter 8 9 S0_FETCH $end
+$var parameter 8 : S1_FETCH $end
+$var parameter 8 ; S2_FETCH $end
+$var parameter 8 < S3_DECODE $end
+$var parameter 8 = S4_ADD_IMM $end
+$var parameter 8 > S4_BRZ_DIR $end
+$var parameter 8 ? S4_LDA_DIR $end
+$var parameter 8 @ S4_LDA_IMM $end
+$var parameter 8 A S4_STA_DIR $end
+$var parameter 8 B S5_ADD_IMM $end
+$var parameter 8 C S5_BRZ_DIR $end
+$var parameter 8 D S5_LDA_DIR $end
+$var parameter 8 E S5_LDA_IMM $end
+$var parameter 8 F S5_STA_DIR $end
+$var parameter 8 G S6_ADD_IMM $end
+$var parameter 8 H S6_BRZ_DIR $end
+$var parameter 8 I S6_LDA_DIR $end
+$var parameter 8 J S6_LDA_IMM $end
+$var parameter 8 K S6_STA_DIR $end
+$var parameter 8 L S7_LDA_DIR $end
+$var parameter 8 M S7_STA_DIR $end
+$var parameter 8 N S8_LDA_DIR $end
+$var parameter 8 O STA_DIR $end
+$var reg 3 P ALU_Sel [2:0] $end
+$var reg 1 * A_Load $end
+$var reg 1 ) B_Load $end
+$var reg 2 Q Bus1_Sel [1:0] $end
+$var reg 2 R Bus2_Sel [1:0] $end
+$var reg 1 & CCR_Load $end
+$var reg 1 % IR_Load $end
+$var reg 1 $ MAR_Load $end
+$var reg 1 # PC_Inc $end
+$var reg 1 " PC_Load $end
+$var reg 8 S current_state [7:0] $end
+$var reg 8 T next_state [7:0] $end
+$var reg 1 ! write $end
+$scope begin NEXT_STATE_LOGIC $end
+$upscope $end
+$scope begin OUTPUT_LOGIC $end
+$upscope $end
+$scope begin STATE_MEMORY $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b11 O
+b1011 N
+b10010 M
+b1010 L
+b10001 K
+b110 J
+b1001 I
+b10101 H
+b1110 G
+b10000 F
+b101 E
+b1000 D
+b10100 C
+b1101 B
+b1111 A
+b100 @
+b111 ?
+b10011 >
+b1100 =
+b11 <
+b10 ;
+b1 :
+b0 9
+b1 8
+b10 7
+b110000 6
+b10001 5
+b1010 -
+b110000 ,
+$end
+#0
+$dumpvars
+b1 T
+b0 S
+b1 R
+b0 Q
+b0 P
+b11111111 4
+b0 3
+02
+b0 1
+b11111111 0
+0/
+b0 .
+b0 +
+0*
+0)
+b0 (
+b1 '
+0&
+0%
+1$
+0#
+0"
+0!
+$end
+#5000
+1/
+#10000
+0/
+12
+#15000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#20000
+0/
+#25000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b1 1
+b1 0
+b1 4
+1/
+#30000
+0/
+#35000
+b0 '
+b0 R
+0$
+b100 T
+b11 S
+1/
+#40000
+0/
+#45000
+b10 '
+b10 R
+b1 +
+b1 P
+1#
+1)
+b101 T
+b100 S
+1/
+#50000
+0/
+#55000
+b10 (
+b10 Q
+1&
+1*
+b1 '
+b1 R
+b0 +
+b0 P
+0#
+0)
+b110 T
+b101 S
+b10 1
+b10101010 0
+b10101010 4
+1/
+#60000
+0/
+#65000
+b0 '
+b0 R
+b0 (
+b0 Q
+0*
+0&
+b0 T
+b110 S
+1/
+#70000
+0/
+#75000
+b1 '
+b1 R
+1$
+b1 T
+b0 S
+1/
+#80000
+0/
+#85000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#90000
+0/
+#95000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b11 1
+b10001 0
+b10001 4
+1/
+#100000
+0/
+#105000
+b0 '
+b0 R
+0$
+b1100 T
+b11 S
+1/
+#110000
+0/
+#115000
+b10 '
+b10 R
+b1 +
+b1 P
+1#
+1)
+b1101 T
+b1100 S
+1/
+#120000
+0/
+#125000
+b1 (
+b1 Q
+1&
+1*
+b0 '
+b0 R
+b0 +
+b0 P
+0#
+0)
+b1110 T
+b1101 S
+b100 1
+b101 0
+b101 4
+1/
+#130000
+0/
+#135000
+b0 (
+b0 Q
+0*
+0&
+b0 T
+b1110 S
+1/
+#140000
+0/
+#145000
+b1 '
+b1 R
+1$
+b1 T
+b0 S
+1/
+#150000
+0/
+#155000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#160000
+0/
+#165000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b101 1
+b11 0
+b11 4
+1/
+#170000
+0/
+#175000
+b0 '
+b0 R
+0$
+b1111 T
+b11 S
+1/
+#180000
+0/
+#185000
+b10000 T
+b1111 S
+1/
+#190000
+0/
+#195000
+b10001 T
+b10000 S
+1/
+#200000
+0/
+#205000
+b10010 T
+b10001 S
+1/
+#210000
+0/
+#215000
+b1 (
+b1 Q
+1!
+b0 T
+b10010 S
+1/
+#220000
+0/
+#225000
+b1 '
+b1 R
+1$
+b0 (
+b0 Q
+0!
+b1 T
+b0 S
+1/
+#230000
+0/
+#235000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#240000
+0/
+#245000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b110 1
+b1 0
+b1 4
+1/
+#250000
+0/
+#255000
+b0 '
+b0 R
+0$
+b100 T
+b11 S
+1/
+#260000
+0/
+#265000
+b10 '
+b10 R
+b1 +
+b1 P
+1#
+1)
+b101 T
+b100 S
+1/
+#270000
+0/
+#275000
+b10 (
+b10 Q
+1&
+1*
+b1 '
+b1 R
+b0 +
+b0 P
+0#
+0)
+b110 T
+b101 S
+b111 1
+b1010000 0
+b1010000 4
+1/
+#280000
+0/
+#285000
+b0 '
+b0 R
+b0 (
+b0 Q
+0*
+0&
+b0 T
+b110 S
+1/
+#290000
+0/
+#295000
+b1 '
+b1 R
+1$
+b1 T
+b0 S
+1/
+#300000
+0/
+#305000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#310000
+0/
+#315000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b1000 1
+b110000 0
+b110000 4
+1/
+#320000
+0/
+#325000
+b0 '
+b0 R
+0$
+b10011 T
+b11 S
+b100 .
+b100 3
+1/
+#330000
+0/
+#335000
+b10 '
+b10 R
+b1 +
+b1 P
+1#
+1$
+b10100 T
+b10011 S
+1/
+#340000
+0/
+#345000
+b1 '
+b1 R
+b0 +
+b0 P
+1$
+0#
+b10101 T
+b10100 S
+b1001 1
+b0 0
+b0 4
+1/
+#350000
+0/
+#355000
+1"
+b10 '
+b10 R
+0$
+b0 T
+b10101 S
+b0 .
+b0 3
+1/
+#360000
+0/
+#365000
+1$
+b1 '
+b1 R
+0"
+b1 T
+b0 S
+b0 1
+b10000000 0
+b10000000 4
+1/
+#370000
+0/
+#375000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#380000
+0/
+#385000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b1 1
+b1 0
+b1 4
+1/
+#390000
+0/
+#395000
+b0 '
+b0 R
+0$
+b100 T
+b11 S
+1/
+#400000
+0/
+#405000
+b10 '
+b10 R
+b1 +
+b1 P
+1#
+1)
+b101 T
+b100 S
+1/
+#410000
+0/
+#415000
+b10 (
+b10 Q
+1&
+1*
+b1 '
+b1 R
+b0 +
+b0 P
+0#
+0)
+b110 T
+b101 S
+b10 1
+b10101010 0
+b10101010 4
+1/
+#420000
+0/
+#425000
+b0 '
+b0 R
+b0 (
+b0 Q
+0*
+0&
+b0 T
+b110 S
+1/
+#430000
+0/
+#435000
+b1 '
+b1 R
+1$
+b1 T
+b0 S
+1/
+#440000
+0/
+#445000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#450000
+0/
+#455000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b11 1
+b10001 0
+b10001 4
+1/
+#460000
+0/
+#465000
+b0 '
+b0 R
+0$
+b1100 T
+b11 S
+1/
+#470000
+0/
+#475000
+b10 '
+b10 R
+b1 +
+b1 P
+1#
+1)
+b1101 T
+b1100 S
+1/
+#480000
+0/
+#485000
+b1 (
+b1 Q
+1&
+1*
+b0 '
+b0 R
+b0 +
+b0 P
+0#
+0)
+b1110 T
+b1101 S
+b100 1
+b101 0
+b101 4
+1/
+#490000
+0/
+#495000
+b0 (
+b0 Q
+0*
+0&
+b0 T
+b1110 S
+1/
+#500000
+0/
+#505000
+b1 '
+b1 R
+1$
+b1 T
+b0 S
+1/
+#510000
+0/
+#515000
+b1 +
+b1 P
+1#
+1%
+b10 '
+b10 R
+0$
+b10 T
+b1 S
+1/
+#520000
+0/
+#525000
+1$
+b1 '
+b1 R
+b0 +
+b0 P
+0%
+0#
+b11 T
+b10 S
+b101 1
+b11 0
+b11 4
+1/
