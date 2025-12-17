@@ -1,0 +1,680 @@
+$date
+	Tue Dec 16 23:48:55 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module control_unit_tb $end
+$var wire 1 ! write $end
+$var wire 1 " PC_Load $end
+$var wire 1 # PC_Inc $end
+$var wire 1 $ MAR_Load $end
+$var wire 1 % IR_Load $end
+$var wire 1 & CCR_Load $end
+$var wire 2 ' Bus2_Sel [1:0] $end
+$var wire 2 ( Bus1_Sel [1:0] $end
+$var wire 1 ) B_Load $end
+$var wire 1 * A_Load $end
+$var wire 3 + ALU_Sel [2:0] $end
+$var parameter 8 , BRZ_DIR $end
+$var parameter 32 - CLK_PERIOD $end
+$var reg 4 . CCR_Result_tb [3:0] $end
+$var reg 1 / Clk $end
+$var reg 8 0 IR_tb [7:0] $end
+$var reg 8 1 PC_sim [7:0] $end
+$var reg 1 2 Reset $end
+$scope module DUT $end
+$var wire 4 3 CCR_Result [3:0] $end
+$var wire 1 / Clk $end
+$var wire 8 4 IR [7:0] $end
+$var wire 1 2 Reset $end
+$var wire 1 5 Z $end
+$var wire 1 6 V $end
+$var wire 1 7 N $end
+$var wire 1 8 C $end
+$var parameter 8 9 ADD_AB $end
+$var parameter 8 : BEQ $end
+$var parameter 8 ; BNE $end
+$var parameter 8 < BRA $end
+$var parameter 8 = LDA_DIR $end
+$var parameter 8 > LDA_IMM $end
+$var parameter 8 ? LDB_DIR $end
+$var parameter 8 @ LDB_IMM $end
+$var parameter 8 A S0_FETCH $end
+$var parameter 8 B S1_FETCH_WAIT $end
+$var parameter 8 C S2_FETCH_DONE $end
+$var parameter 8 D S3_DECODE $end
+$var parameter 8 E S4_ALU $end
+$var parameter 8 F S4_BR_ADDR $end
+$var parameter 8 G S4_DIR_ADDR_RD $end
+$var parameter 8 H S4_LDR_IMM_MAR $end
+$var parameter 8 I S5_BR_WAIT $end
+$var parameter 8 J S5_DIR_ADDR_WT $end
+$var parameter 8 K S5_LDR_IMM_WT $end
+$var parameter 8 L S6_BR_DONE $end
+$var parameter 8 M S6_DIR_ADDR_LD $end
+$var parameter 8 N S6_LDR_IMM_LD $end
+$var parameter 8 O S7_DIR_RW_OP $end
+$var parameter 8 P S8_DIR_RW_WT $end
+$var parameter 8 Q S9_DIR_RW_DONE $end
+$var parameter 8 R STA_DIR $end
+$var parameter 8 S STB_DIR $end
+$var reg 3 T ALU_Sel [2:0] $end
+$var reg 1 * A_Load $end
+$var reg 1 ) B_Load $end
+$var reg 2 U Bus1_Sel [1:0] $end
+$var reg 2 V Bus2_Sel [1:0] $end
+$var reg 1 & CCR_Load $end
+$var reg 1 % IR_Load $end
+$var reg 1 $ MAR_Load $end
+$var reg 1 # PC_Inc $end
+$var reg 1 " PC_Load $end
+$var reg 8 W current_state [7:0] $end
+$var reg 8 X next_state [7:0] $end
+$var reg 1 ! write $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10010111 S
+b10010110 R
+b1100 Q
+b1011 P
+b1010 O
+b110 N
+b1001 M
+b10000 L
+b101 K
+b1000 J
+b1111 I
+b100 H
+b111 G
+b1110 F
+b1101 E
+b11 D
+b10 C
+b1 B
+b0 A
+b10001000 @
+b10001001 ?
+b10000110 >
+b10000111 =
+b100000 <
+b100100 ;
+b100011 :
+b1000010 9
+b1010 -
+b110000 ,
+$end
+#0
+$dumpvars
+b1 X
+b0 W
+b1 V
+b0 U
+b0 T
+08
+07
+06
+05
+b11111111 4
+b0 3
+02
+b0 1
+b11111111 0
+0/
+b0 .
+b0 +
+0*
+0)
+b0 (
+b1 '
+0&
+0%
+1$
+0#
+0"
+0!
+$end
+#5000
+1/
+#10000
+0/
+12
+#15000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#20000
+0/
+#25000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#30000
+0/
+#35000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1 1
+b1 0
+b1 4
+1/
+#40000
+0/
+#45000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#50000
+0/
+#55000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#60000
+0/
+#65000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#70000
+0/
+#75000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b10 1
+b10101010 0
+b10101010 4
+1/
+#80000
+0/
+#85000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#90000
+0/
+#95000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#100000
+0/
+#105000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#110000
+0/
+#115000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b11 1
+b10001 0
+b10001 4
+1/
+#120000
+0/
+#125000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#130000
+0/
+#135000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#140000
+0/
+#145000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#150000
+0/
+#155000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b100 1
+b101 0
+b101 4
+1/
+#160000
+0/
+#165000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#170000
+0/
+#175000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#180000
+0/
+#185000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#190000
+0/
+#195000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b101 1
+b11 0
+b11 4
+1/
+#200000
+0/
+#205000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#210000
+0/
+#215000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#220000
+0/
+#225000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#230000
+0/
+#235000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b110 1
+b1 0
+b1 4
+1/
+#240000
+0/
+#245000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#250000
+0/
+#255000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#260000
+0/
+#265000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#270000
+0/
+#275000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b111 1
+b1010000 0
+b1010000 4
+1/
+#280000
+0/
+#285000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#290000
+0/
+#295000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#300000
+0/
+#305000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#310000
+0/
+#315000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1000 1
+b110000 0
+b110000 4
+1/
+#320000
+0/
+#325000
+b1 '
+b1 V
+1$
+b1 X
+15
+b0 W
+b100 .
+b100 3
+1/
+#330000
+0/
+#335000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#340000
+0/
+#345000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#350000
+0/
+#355000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1001 1
+b0 0
+b0 4
+1/
+#360000
+0/
+#365000
+b1 '
+b1 V
+1$
+b1 X
+05
+b0 W
+b0 .
+b0 3
+1/
+#370000
+0/
+#375000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#380000
+0/
+#385000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#390000
+0/
+#395000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1010 1
+b10000000 0
+b10000000 4
+1/
+#400000
+0/
+#405000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#410000
+0/
+#415000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#420000
+0/
+#425000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#430000
+0/
+#435000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1011 1
+bx 0
+bx 4
+1/
+#440000
+0/
+#445000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#450000
+0/
+#455000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#460000
+0/
+#465000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#470000
+0/
+#475000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1100 1
+1/
+#480000
+0/
+#485000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
+#490000
+0/
+#495000
+b0 '
+b0 V
+0$
+b10 X
+b1 W
+1/
+#500000
+0/
+#505000
+b10 '
+b10 V
+1#
+1%
+b11 X
+b10 W
+1/
+#510000
+0/
+#515000
+b0 '
+b0 V
+0%
+0#
+b0 X
+b11 W
+b1101 1
+1/
+#520000
+0/
+#525000
+b1 '
+b1 V
+1$
+b1 X
+b0 W
+1/
