@@ -44,24 +44,16 @@ module rom_128x8_sync
 	 
 	 
 	 
-	 initial begin
-        
-        ROM[0] = LDB_IMM;   
-        ROM[1] = 8'h0A;     // Dado para B
-        ROM[2] = LDA_IMM;   
-        ROM[3] = 8'h05;     // Dado para A
-        ROM[4] = ADD_AB;    
-        ROM[5] = STA_DIR;   
-        ROM[6] = 8'h00;     // Endereço High (Parte alta)
-        ROM[7] = 8'h80;     // Endereço Low  (Parte baixa)
-        ROM[8] = BRA;
-        ROM[9] = 8'h00;     // Pula para 0008 (fica preso aqui)
-        ROM[10] = 8'h08;
-
-        for (integer i = 11; i < 128; i = i + 1) begin
-            ROM[i] = 8'h00;
-        end
-    end
+	 initial
+	 	begin
+	 		ROM[0] = LDA_DIR; 	// Load the value from address 7 to A
+	 		ROM[1] = 8'hF0;		// Address (port_in_0)
+	 		ROM[2] = LDB_IMM;	// Load the value 10 to LDB
+	 		ROM[3] = 8'h0A;		// Data
+	 		ROM[4] = ADD_AB;	// ADD A and B
+	 		ROM[5] = STA_DIR;	// Store the sum in address 7
+			ROM[6] = 8'h82;		// Address 130
+	 	end
 	 
 	 always @ (address) 
 	 	begin
@@ -71,11 +63,8 @@ module rom_128x8_sync
 			EN = 1'b0;
 		end
 	 	
-
-	always @ (posedge clk) begin
-		if (EN)
-			data_out = ROM[address];
-		else
-			data_out = 8'h00;
-	end
+	 always @ (posedge clk)
+	 	if (EN)
+		 	data_out = ROM[address];
+	 		
 endmodule
